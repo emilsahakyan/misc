@@ -7,16 +7,16 @@ rm -rf /home/$USER/.local/share/nvim/
 # AstroNvim installation
 git clone https://github.com/AstroNvim/AstroNvim /home/$USER/.config/nvim
 # My Nvim configuration
-git clone https://github.com/emilsahakyan/nvim.git /home/$USER/.config/nvim/lua/user
+git clone git@github.com:emilsahakyan/nvim.git /home/$USER/.config/nvim/lua/user
 
 # Install Nord fonts
 FDIR="/home/$USER/.local/share/fonts"
 pushd /home/$USER/.config/nvim/
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Ubuntu.zip .
 unzip Ubuntu.zip
-mkdir -p $FDIR 
-mv Ubuntu*.ttf $FDIR 
-rm -r Ubuntu.zip 
+mkdir -p $FDIR
+mv Ubuntu*.ttf $FDIR
+rm -r Ubuntu.zip
 fc-cache -f -v
 
 nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

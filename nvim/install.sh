@@ -15,7 +15,7 @@ sudo apt install -y  python3-venv
 # sudo apt install -y  npm
 git clone https://github.com/neovim/neovim.git /home/$USER/neovim
 pushd /home/$USER/neovim
-git checkout nightly
+git checkout stable
 make -j `nproc` CMAKE_BUILD_TYPE=Release
 sudo make install
 popd
