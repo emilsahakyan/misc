@@ -38,7 +38,6 @@ nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 # :TSInstall cpp
 # :TSInstall help
 # :TSInstall make
-# :TSInstall python
 # :TSInstall regex
 # :TSInstall verilog
 # :TSInstall vim
