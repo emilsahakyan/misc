@@ -42,26 +42,28 @@ fc-cache -f -v
 
 nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
-# Lsp servers
-#nvim  --headless -c 'LspInstall pyright'
-#nvim  --headless -c 'LspInstall clangd'
-#nvim  --headless -c 'LspInstall cmake'
-#nvim  --headless -c 'LspInstall jsonls'
-#nvim  --headless -c 'LspInstall sumneko_lua'
-#nvim  --headless -c 'LspInstall verible'
+# Install Lsp servers (manual)
+#   :LspInstall pyright
+#   :LspInstall clangd
+#   :LspInstall cmake
+#   :LspInstall jsonls
+#   :LspInstall sumneko_lua
+#   :LspInstall verible
+#? nvim  --headless -c 'LspInstall pyright'
 
-# Treesitter
-#nvim  --headless -c 'TSInstall python'
-#nvim  --headless -c 'TSInstall bash'
-#nvim  --headless -c 'TSInstall c'
-#nvim  --headless -c 'TSInstall cmake'
-#nvim  --headless -c 'TSInstall cpp'
-#nvim  --headless -c 'TSInstall help'
-#nvim  --headless -c 'TSInstall make'
-#nvim  --headless -c 'TSInstall python'
-#nvim  --headless -c 'TSInstall regex'
-#nvim  --headless -c 'TSInstall verilog'
-#nvim  --headless -c 'TSInstall vim'
+# Install Treesitter (manual)
+# :TSInstall python
+# :TSInstall bash
+# :TSInstall c
+# :TSInstall cmake
+# :TSInstall cpp
+# :TSInstall help
+# :TSInstall make
+# :TSInstall python
+# :TSInstall regex
+# :TSInstall verilog
+# :TSInstall vim
+#? nvim  --headless -c 'TSInstall python'
 
 # For debugging python scripts using DAP plugin
 rm -rf /home/$USER/python/virtualenvs/debugpy
