@@ -13,7 +13,8 @@ sudo apt install -y  ninja-build gettext libtool libtool-bin autoconf automake c
 # To install fonts
 sudo apt install -y font-manager 
 # For language servers
-# sudo apt install -y  python3-venv npm
+ sudo apt install -y  python3-venv
+# sudo apt install -y  npm
 git clone https://github.com/neovim/neovim.git ~/.config/nvim/neovim
 pushd ~/.config/nvim/neovim
 git checkout stable
