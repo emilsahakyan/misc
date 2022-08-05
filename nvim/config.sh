@@ -21,28 +21,6 @@ fc-cache -f -v
 
 nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
-# Install Lsp servers (manual)
-#   :LspInstall pyright
-#   :LspInstall clangd
-#   :LspInstall cmake
-#   :LspInstall jsonls
-#   :LspInstall sumneko_lua
-#   :LspInstall verible
-#? nvim  --headless -c 'LspInstall pyright'
-
-# Install Treesitter (manual)
-# :TSInstall python
-# :TSInstall bash
-# :TSInstall c
-# :TSInstall cmake
-# :TSInstall cpp
-# :TSInstall help
-# :TSInstall make
-# :TSInstall regex
-# :TSInstall verilog
-# :TSInstall vim
-#? nvim  --headless -c 'TSInstall python'
-
 # For debugging python scripts using DAP plugin
 rm -rf /home/$USER/python/virtualenvs/debugpy
 python3 -m venv /home/$USER/python/virtualenvs/debugpy
