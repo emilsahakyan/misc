@@ -19,9 +19,17 @@ mv Ubuntu*.ttf $FDIR
 rm -r Ubuntu.zip
 fc-cache -f -v
 
+sed -i 's/skip_prompts = false/skip_prompts = true/' /home/$USER/.config/nvim/lua/user/updater.lua
+nvim --headless -c 'AstroUpdate' -c 'quitall'
 nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
+pushd /home/$USER/.config/nvim/lua/user/
+git checkout updater.lua
+popd
 
 # For debugging python scripts using DAP plugin
 rm -rf /home/$USER/python/virtualenvs/debugpy
 python3 -m venv /home/$USER/python/virtualenvs/debugpy
 /home/$USER/python/virtualenvs/debugpy/bin/python -m pip install debugpy
+
+echo "Done configuring nvim"
