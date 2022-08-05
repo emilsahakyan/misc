@@ -19,10 +19,14 @@ mv Ubuntu*.ttf $FDIR
 rm -r Ubuntu.zip
 fc-cache -f -v
 
+# Temporally disable prompts for updates
 sed -i 's/skip_prompts = false/skip_prompts = true/' /home/$USER/.config/nvim/lua/user/updater.lua
+# Update the AstroNvim to the version corresponding to what is set via the 'updater.lua' config
 nvim --headless -c 'AstroUpdate' -c 'quitall'
+# Compile with the user configs
 nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
+# Revert the prompt flag change
 pushd /home/$USER/.config/nvim/lua/user/
 git checkout updater.lua
 popd
