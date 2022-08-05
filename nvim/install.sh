@@ -84,7 +84,7 @@ echo "Remove an old build dir, if exists"
 rm -rf /home/$USER/neovim
 
 if [ $SUDOER -eq 1 ] && { [ $CLEAN -eq 1 ] || [ $INSTALL -eq 1 ]; }; then
-   	if [ $CLEAN -eq 1 ]; then
+   	if [[ $CLEAN -eq 1 && "$PREFIX" == "" ]]; then
    	 	echo "Remove existing nvim installation"
    	 	sudo rm /usr/local/bin/nvim
    	 	sudo rm -r /usr/local/share/nvim/
