@@ -5,8 +5,10 @@ function show_help()
 	echo "./install.sh OPTIONS:"
 	echo -e "\t '-p|--prefix' where to install"
 	echo -e "\t '-s|--sudoer' set if has sudo privilege"
+	echo -e "\t '-i|--install' install prerequisites"
+	echo -e "\t '-t|--tag' default=stable"
 	echo -e "\t '-h|--help ' this help"
-	echo -e "e.g. ./install.sh -p /home/user/neovim -s"
+	echo -e "e.g. ./install.sh -p /home/user/nvim -s -i -t nightly"
 
 }
 
@@ -81,7 +83,7 @@ if [[ $SUDOER -eq 0 && $INSTALL -eq 1 ]]; then
 fi
 
 echo "Remove an old build dir, if exists"
-rm -rf /home/$USER/neovim
+rm -rf /home/$USER/neovim_install_dir
 
 if [ $SUDOER -eq 1 ] && { [ $CLEAN -eq 1 ] || [ $INSTALL -eq 1 ]; }; then
    	if [[ $CLEAN -eq 1 && "$PREFIX" == "" ]]; then
@@ -111,8 +113,8 @@ echo "Remove an old insstall dir, if exists"
 	rm -rf $PREFIX
 fi
 
-git clone https://github.com/neovim/neovim.git /home/$USER/neovim
-pushd /home/$USER/neovim
+git clone https://github.com/neovim/neovim.git /home/$USER/neovim_install_dir
+pushd /home/$USER/neovim_install_dir
 echo "Checking out to: $TAG version"
 git checkout $TAG
 
@@ -133,7 +135,10 @@ else
 fi
 
 popd
-rm -rf /home/$USER/neovim
+rm -rf /home/$USER/neovim_install_dir
 
 echo "Done installing neovim"
-echo "USE: export PATH="$PREFIX/bin:\$PATH""
+
+if [ "$PREFIX" != "" ]; then
+	echo "USE: export PATH="$PREFIX/bin:\$PATH""
+fi
