@@ -6,9 +6,9 @@ function show_help()
 	echo -e "\t '-p|--prefix' where to install"
 	echo -e "\t '-s|--sudoer' set if has sudo privilege"
 	echo -e "\t '-i|--install' install prerequisites"
-	echo -e "\t '-t|--tag' default=stable"
+	echo -e "\t '-t|--tag', e.g nightly or v0.7.2. default is stable version"
 	echo -e "\t '-h|--help ' this help"
-	echo -e "e.g. ./install.sh -p /home/user/nvim -s -i -t nightly"
+	echo -e "e.g. ./install.sh -p /home/user/nvim -s -i -t v0.7.2"
 
 }
 
@@ -116,6 +116,8 @@ fi
 git clone https://github.com/neovim/neovim.git /home/$USER/neovim_install_dir
 pushd /home/$USER/neovim_install_dir
 echo "Checking out to: $TAG version"
+
+# Switch to the tagged version 
 git checkout $TAG
 
 if [ "$PREFIX" == "" ]; then
