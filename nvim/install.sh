@@ -7,6 +7,7 @@ function show_help()
 	echo -e "\t '-s|--sudoer' set if has sudo privilege"
 	echo -e "\t '-i|--install' install prerequisites"
 	echo -e "\t '-t|--tag', e.g nightly or v0.7.2. default is stable version"
+	echo -e "\t '-c|--clean', clean an old install. if -s and ! -p the clean is applied system wide"
 	echo -e "\t '-h|--help ' this help"
 	echo -e "e.g. ./install.sh -p /home/user/nvim -s -i -t v0.7.2"
 
@@ -24,15 +25,15 @@ do
 	key="$1"
 
 	case $key in
-		-s|sudoer)
+		-s|--sudoer)
 			SUDOER=1
 			shift
 			;;
-		-c|clean)
+		-c|--clean)
 			CLEAN=1
 			shift
 			;;
-		-i|install)
+		-i|--install)
 			INSTALL=1
 			shift
 			;;
