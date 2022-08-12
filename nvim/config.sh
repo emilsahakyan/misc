@@ -32,8 +32,8 @@ git checkout updater.lua
 popd
 
 # For debugging python scripts using DAP plugin
-rm -rf /home/$USER/python/virtualenvs/debugpy
-python3 -m venv /home/$USER/python/virtualenvs/debugpy
-/home/$USER/python/virtualenvs/debugpy/bin/python -m pip install debugpy
+#rm -rf /home/$USER/python/virtualenvs/debugpy
+#python3 -m venv /home/$USER/python/virtualenvs/debugpy
+#/home/$USER/python/virtualenvs/debugpy/bin/python -m pip install debugpy
 
 echo "Done configuring nvim"
