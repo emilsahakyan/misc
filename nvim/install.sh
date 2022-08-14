@@ -9,7 +9,7 @@ function show_help()
 	echo -e "\t '-t|--tag', e.g nightly or v0.7.2. default is stable version"
 	echo -e "\t '-c|--clean', clean an old install. if -s and ! -p the clean is applied system wide"
 	echo -e "\t '-h|--help ' this help"
-	echo -e "e.g. ./install.sh -p /home/user/nvim -s -i -t v0.7.2"
+	echo -e "e.g. ./install.sh -p $HOME/nvim -s -i -t v0.7.2"
 
 }
 
@@ -84,7 +84,7 @@ if [[ $SUDOER -eq 0 && $INSTALL -eq 1 ]]; then
 fi
 
 echo "Remove an old build dir, if exists"
-rm -rf /home/$USER/neovim_install_dir
+rm -rf $HOME/neovim_install_dir
 
 if [ $SUDOER -eq 1 ] && { [ $CLEAN -eq 1 ] || [ $INSTALL -eq 1 ]; }; then
    	if [[ $CLEAN -eq 1 && "$PREFIX" == "" ]]; then
@@ -114,8 +114,8 @@ echo "Remove an old insstall dir, if exists"
 	rm -rf $PREFIX
 fi
 
-git clone https://github.com/neovim/neovim.git /home/$USER/neovim_install_dir
-pushd /home/$USER/neovim_install_dir
+git clone https://github.com/neovim/neovim.git $HOME/neovim_install_dir
+pushd $HOME/neovim_install_dir
 echo "Checking out to: $TAG version"
 
 # Switch to the tagged version 
@@ -138,7 +138,7 @@ else
 fi
 
 popd
-rm -rf /home/$USER/neovim_install_dir
+rm -rf $HOME/neovim_install_dir
 
 echo "Done installing neovim"
 
