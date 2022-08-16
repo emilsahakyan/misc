@@ -143,5 +143,5 @@ rm -rf $HOME/neovim_install_dir
 echo "Done installing neovim"
 
 if [ "$PREFIX" != "" ]; then
-	echo "USE: export PATH="$PREFIX/bin:\$PATH""
+	echo "Be sure to 'export PATH="$PREFIX/bin:\$PATH"' to be able to run the nvim"
 fi
