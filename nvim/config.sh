@@ -47,11 +47,11 @@ rm -rf $HOME/.local/share/nvim/
 if [ $FONTS -eq 1 ]; then
 	FDIR="$HOME/.local/share/fonts"
 	pushd $HOME/.config/nvim/
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Ubuntu.zip .
-	unzip Ubuntu.zip
+	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip .
+	unzip UbuntuMono.zip
 	mkdir -p $FDIR
 	mv Ubuntu*.ttf $FDIR
-	rm -r Ubuntu.zip
+	rm -r UbuntuMono.zip
 	fc-cache -f -v
 fi
 
