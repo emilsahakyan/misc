@@ -2,16 +2,17 @@
 
 function show_help()
 {
-	echo "./install.sh OPTIONS:"
+	echo "./config.sh OPTIONS:"
 	echo -e "\t '-f|--fonts' to install Nord fonts"
 	echo -e "\t '-c|--custom' to apply custom configs"
+	echo -e "\t '-u|--update' to only update configs"
 	echo -e "\t '-h|--help ' this help"
 	echo -e "e.g. ./config.sh -f -c"
-
 }
 
 FONTS=0
 CUSTOM=0
+UPDATE=0
 
 # command line args
 while [[ $# -gt 0 ]]
@@ -27,6 +28,10 @@ do
 			CUSTOM=1
 			shift
 			;;
+		-u|--update)
+			UPDATE=1
+			shift
+			;;
 		-h|--help)
 			show_help
 			exit 0
@@ -38,6 +43,14 @@ do
 			;;
 	esac
 done
+
+# Update only
+if [ $UPDATE -eq 1 ]; then
+	pushd  $HOME/.config/nvim/lua/user
+	git pull
+	echo "Done configuration update"
+	exit
+fi
 
 # Remove any old config files
 rm -rf $HOME/.config/nvim 
@@ -56,10 +69,10 @@ if [ $FONTS -eq 1 ]; then
 fi
 
 # AstroNvim installation
-git clone https://github.com/AstroNvim/AstroNvim /$HOME/.config/nvim
+git clone https://github.com/AstroNvim/AstroNvim $HOME/.config/nvim
 if [ $CUSTOM -eq 1 ]; then
 	# My Nvim configuration
-	git clone git@github.com:emilsahakyan/nvim.git /$HOME/.config/nvim/lua/user
+	git clone git@github.com:emilsahakyan/nvim.git $HOME/.config/nvim/lua/user
 	# Temporally disable prompts for updates
 	sed -i 's/skip_prompts = false/skip_prompts = true/' $HOME/.config/nvim/lua/user/updater.lua
 fi
