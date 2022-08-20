@@ -59,7 +59,7 @@ fi
 git clone https://github.com/AstroNvim/AstroNvim /$HOME/.config/nvim
 if [ $CUSTOM -eq 1 ]; then
 	# My Nvim configuration
-	git clone https://github.com/emilsahakyan/nvim.git /$HOME/.config/nvim/lua/user
+	git clone git@github.com:emilsahakyan/nvim.git /$HOME/.config/nvim/lua/user
 	# Temporally disable prompts for updates
 	sed -i 's/skip_prompts = false/skip_prompts = true/' $HOME/.config/nvim/lua/user/updater.lua
 fi
