@@ -65,12 +65,14 @@ echo -e "TAG:        $TAG"
 echo -e "CLEAN:      $CLEAN"
 echo -e "INSTALL:    $INSTALL"
 
-$(sudo --list passwd)>/dev/null
-IS_NOT_SUDO=$?
 
-if [[ $SUDOER -eq 1 && $IS_NOT_SUDO -eq 1 ]]; then
-    echo "ERROR: The user that is trying to install nvim for the system does not have sudo privilege"
-    exit 0;
+if [ $SUDOER -eq 1 ]; then
+	$(sudo --list passwd)>/dev/null
+	IS_NOT_SUDO=$?
+	if [ $IS_NOT_SUDO -eq 1 ]; then
+    	echo "ERROR: The user that is trying to install nvim for the system does not have sudo privilege"
+    	exit 0;
+    fi
 fi
 
 if [[ $SUDOER -eq 0 && "$PREFIX" == "" ]]; then
