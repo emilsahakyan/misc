@@ -3,7 +3,7 @@
 function show_help()
 {
 	echo "./config.sh OPTIONS:"
-	echo -e "\t '-f|--fonts' to install Nord fonts"
+	echo -e "\t '-f|--fonts' to install Nerd fonts"
 	echo -e "\t '-c|--custom' to apply custom configs"
 	echo -e "\t '-u|--update' to only update configs"
 	echo -e "\t '-h|--help ' this help"
@@ -56,15 +56,16 @@ fi
 rm -rf $HOME/.config/nvim 
 rm -rf $HOME/.local/share/nvim/
 
-# Install Nord fonts
+# Install Nerd fonts
 if [ $FONTS -eq 1 ]; then
 	FDIR="$HOME/.local/share/fonts"
 	pushd $HOME/.config/nvim/
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip .
-	unzip UbuntuMono.zip
+	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip .
+	unzip Hack.zip
 	mkdir -p $FDIR
-	mv Ubuntu*.ttf $FDIR
-	rm -r UbuntuMono.zip
+	rm *Windows*.ttf
+	mv Hack*.ttf $FDIR
+	rm -r Hack.zip
 	fc-cache -f -v
 fi
 
