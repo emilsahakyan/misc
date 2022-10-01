@@ -6,12 +6,16 @@ function show_help()
 	echo -e "\t '-f|--fonts' to install Nerd fonts"
 	echo -e "\t '-c|--custom' to apply custom configs"
 	echo -e "\t '-u|--update' to only update configs"
+	echo -e "\t '-n|--nightly' use nightly branch, default=stable"
+	echo -e "\t '-l|--latest' latest plugins, default pinned to stable"
 	echo -e "\t '-h|--help ' this help"
 	echo -e "e.g. ./config.sh -f -c"
 }
 
 FONTS=0
 CUSTOM=0
+LATEST=1
+NIGHTLY=0
 UPDATE=0
 
 # command line args
@@ -30,6 +34,14 @@ do
 			;;
 		-u|--update)
 			UPDATE=1
+			shift
+			;;
+		-n|--nightly)
+			NIGHTLY=1
+			shift
+			;;
+		-l|--latest)
+			LATEST=1
 			shift
 			;;
 		-h|--help)
@@ -74,8 +86,20 @@ git clone https://github.com/AstroNvim/AstroNvim $HOME/.config/nvim
 if [ $CUSTOM -eq 1 ]; then
 	# My Nvim configuration
 	git clone git@github.com:emilsahakyan/nvim.git $HOME/.config/nvim/lua/user
+
 	# Temporally disable prompts for updates
 	sed -i 's/skip_prompts = false/skip_prompts = true/' $HOME/.config/nvim/lua/user/updater.lua
+	
+	# Switch to nightly
+	if [ $NIGHTLY -eq 1 ]; then
+		sed -i 's/channel = "stable"/channel = "nightly"/' $HOME/.config/nvim/lua/user/updater.lua
+		sed -i 's/branch = "main"/branch= "nightly"/' $HOME/.config/nvim/lua/user/updater.lua
+	fi
+
+	# Disable plugin pinning
+	if [ $LATEST -eq 1 ]; then
+		sed -i 's/pin_plugins = nil/pin_plugins= false/' $HOME/.config/nvim/lua/user/updater.lua
+	fi
 fi
 
 # Update the AstroNvim to the version corresponding to what is set via the 'updater.lua' config
