@@ -8,15 +8,17 @@ function show_help()
 	echo -e "\t '-u|--update' to only update configs"
 	echo -e "\t '-n|--nightly' use nightly branch, default=stable"
 	echo -e "\t '-l|--latest' latest plugins, default pinned to stable"
+	echo -e "\t '-r|--revert' revert to default updater settings"
 	echo -e "\t '-h|--help ' this help"
 	echo -e "e.g. ./config.sh -f -c"
 }
 
 FONTS=0
 CUSTOM=0
-LATEST=1
+LATEST=0
 NIGHTLY=0
 UPDATE=0
+REVERT=0
 
 # command line args
 while [[ $# -gt 0 ]]
@@ -44,6 +46,10 @@ do
 			LATEST=1
 			shift
 			;;
+		-r|--revert)
+			REVERT=1
+			shift
+			;;
 		-h|--help)
 			show_help
 			exit 0
@@ -67,6 +73,7 @@ fi
 # Remove any old config files
 rm -rf $HOME/.config/nvim 
 rm -rf $HOME/.local/share/nvim/
+rm -rf $HOME/.local/state/nvim/
 
 # Install Nerd fonts
 if [ $FONTS -eq 1 ]; then
@@ -100,15 +107,18 @@ if [ $CUSTOM -eq 1 ]; then
 	if [ $LATEST -eq 1 ]; then
 		sed -i 's/pin_plugins = nil/pin_plugins= false/' $HOME/.config/nvim/lua/user/updater.lua
 	fi
+
+	# Auto reload by default
+	sed -i 's/auto_reload = false/auto_reload = true/' $HOME/.config/nvim/lua/user/updater.lua
 fi
 
 # Update the AstroNvim to the version corresponding to what is set via the 'updater.lua' config
-nvim --headless -c 'AstroUpdate' -c 'quitall'
+#nvim --headless -c 'AstroUpdate' -c 'quitall'
 # Compile with the user configs
-nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+#nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
-# Revert the prompt flag change
-if [ $CUSTOM -eq 1 ]; then
+# Revert the updater options to original
+if [[ $REVERT -eq 1 && $CUSTOM -eq 1 ]]; then
 	pushd $HOME/.config/nvim/lua/user/
 	git checkout updater.lua
 	popd
