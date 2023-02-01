@@ -11,3 +11,6 @@
   ./config.sh [options]
 ````
 -h for availabel options
+
+Basic installation options
+`./config.sh -f -c`
