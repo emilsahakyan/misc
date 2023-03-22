@@ -70,8 +70,10 @@ if [ $UPDATE -eq 1 ]; then
 	exit
 fi
 
-# Remove any old config files
-rm -rf $HOME/.config/nvim 
+# Move old config files
+mv $HOME/.config/nvim $HOME/.config/nvim.old
+
+# Remove any old files
 rm -rf $HOME/.local/share/nvim/
 rm -rf $HOME/.local/state/nvim/
 
