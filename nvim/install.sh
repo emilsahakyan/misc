@@ -123,6 +123,9 @@ echo "Checking out to: $TAG version"
 # Switch to the tagged version 
 git checkout $TAG
 
+# Make Release
+sed -i 's/CMAKE_BUILD_TYPE ?= Debug/CMAKE_BUILD_TYPE ?= Release/' Makefile
+
 if [ "$PREFIX" == "" ]; then
 	echo "Make without prefix"
     make -j `nproc` CMAKE_BUILD_TYPE=Release

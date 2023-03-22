@@ -92,35 +92,30 @@ fi
 git clone https://github.com/AstroNvim/AstroNvim $HOME/.config/nvim
 if [ $CUSTOM -eq 1 ]; then
 	# My Nvim configuration
-	git clone git@github.com:emilsahakyan/nvim.git $HOME/.config/nvim/lua/user
+	git clone git@github.com:emilsahakyan/astroNvimConfig.git $HOME/.config/nvim/lua/user
 
 	# Temporally disable prompts for updates
-	sed -i 's/skip_prompts = false/skip_prompts = true/' $HOME/.config/nvim/lua/user/updater.lua
+	sed -i 's/skip_prompts = false/skip_prompts = true/' $HOME/.config/nvim/lua/user/init.lua
 	
 	# Switch to nightly
 	if [ $NIGHTLY -eq 1 ]; then
-		sed -i 's/channel = "stable"/channel = "nightly"/' $HOME/.config/nvim/lua/user/updater.lua
-		sed -i 's/branch = "main"/branch= "nightly"/' $HOME/.config/nvim/lua/user/updater.lua
+		sed -i 's/channel = "stable"/channel = "nightly"/' $HOME/.config/nvim/lua/user/init.lua
+		sed -i 's/branch = "main"/branch= "nightly"/' $HOME/.config/nvim/lua/user/init.lua
 	fi
 
 	# Disable plugin pinning
 	if [ $LATEST -eq 1 ]; then
-		sed -i 's/pin_plugins = nil/pin_plugins= false/' $HOME/.config/nvim/lua/user/updater.lua
+		sed -i 's/pin_plugins = nil/pin_plugins= false/' $HOME/.config/nvim/lua/user/init.lua
 	fi
 
 	# Auto reload by default
-	sed -i 's/auto_reload = false/auto_reload = true/' $HOME/.config/nvim/lua/user/updater.lua
+	sed -i 's/auto_reload = false/auto_reload = true/' $HOME/.config/nvim/lua/user/init.lua
 fi
-
-# Update the AstroNvim to the version corresponding to what is set via the 'updater.lua' config
-#nvim --headless -c 'AstroUpdate' -c 'quitall'
-# Compile with the user configs
-#nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # Revert the updater options to original
 if [[ $REVERT -eq 1 && $CUSTOM -eq 1 ]]; then
 	pushd $HOME/.config/nvim/lua/user/
-	git checkout updater.lua
+	git checkout init.lua
 	popd
 fi
 
